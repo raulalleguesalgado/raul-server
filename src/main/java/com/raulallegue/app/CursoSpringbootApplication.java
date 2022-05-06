@@ -1,13 +1,13 @@
-package com.example.demo;
+package com.raulallegue.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RaulServerApplication {
+public class CursoSpringbootApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RaulServerApplication.class, args);
+		SpringApplication.run(CursoSpringbootApplication.class, args);
 	}
 
 }
