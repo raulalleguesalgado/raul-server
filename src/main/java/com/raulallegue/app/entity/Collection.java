@@ -8,27 +8,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@AllArgsConstructor
+	@NoArgsConstructor
+	@Getter
+	@Setter
 @Entity
-@Table(name = "coleccion")
+@Table(name = "coleccion",uniqueConstraints = {@UniqueConstraint(name = "uq_nombre", columnNames = "nombre")})
 public class Collection implements Serializable{
 
-	private static final long serialVersionUID = -9069060843698080433L;
+	
+
+
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(length = 50)
-	private String name;
 	
-	private String surname;
+	 @NotBlank private String nombre;
 	
-	@Column(name="mail", nullable=false, length = 50, unique = true)
-	private String email;
-	
-	private Boolean enabled;
+	@NotBlank private String publicador;
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -37,36 +46,26 @@ public class Collection implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getPublicador() {
+		return publicador;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setPublicador(String publicador) {
+		this.publicador = publicador;
 	}
+	
+	
 
-	public String getEmail() {
-		return email;
-	}
+	
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
 	
 }

@@ -53,7 +53,7 @@ public class CollectionController {
 		if(!user.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		
+		/*
 		// BeanUtils.copyProperties(userDetails, user.get());
 		user.get().setName(userDetails.getName());
 		user.get().setSurname(userDetails.getSurname());
@@ -61,7 +61,8 @@ public class CollectionController {
 		user.get().setEnabled(userDetails.getEnabled());
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user.get()));
-		
+		*/
+		return null;
 	}
 	
 	// Delete an User
