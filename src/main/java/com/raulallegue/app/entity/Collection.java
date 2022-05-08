@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-@AllArgsConstructor
+	@AllArgsConstructor
 	@NoArgsConstructor
 	@Getter
 	@Setter
@@ -28,6 +28,7 @@ public class Collection implements Serializable{
 
 	
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -37,30 +38,8 @@ public class Collection implements Serializable{
 	
 	@NotBlank private String publicador;
 
+
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getPublicador() {
-		return publicador;
-	}
-
-	public void setPublicador(String publicador) {
-		this.publicador = publicador;
-	}
 	
 	
 

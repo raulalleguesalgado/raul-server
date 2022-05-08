@@ -30,6 +30,7 @@ public class CollectionController {
 	// Create a new user
 	@PostMapping
 	public ResponseEntity<?> create (@RequestBody Collection user) {
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
 	}
 	
