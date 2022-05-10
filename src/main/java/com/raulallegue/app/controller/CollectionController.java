@@ -8,17 +8,13 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.raulallegue.app.entity.Collection;
 import com.raulallegue.app.service.CollectionService;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users")
@@ -27,66 +23,53 @@ public class CollectionController {
 	@Autowired
 	private CollectionService userService;
 	
-	// Create a new user
+// Create a new user
 	@PostMapping
-	public ResponseEntity<?> create (@RequestBody Collection user) {
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
+	public Collection create ( @RequestBody Collection user) {
+
+		return userService.save(user);
 	}
 	
 	// Read an user
 	@GetMapping("/{id}")
-	public ResponseEntity<?> read (@PathVariable(value = "id") Long userId) {
+	public Collection read (@PathVariable(value = "id") Long userId) {
 		Optional<Collection> oUser = userService.findById(userId);
-		
+
 		if(!oUser.isPresent()) {
-			return ResponseEntity.notFound().build();
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, String.format("Collection %d Not Found", userId));
 		}
-		
-		return ResponseEntity.ok(oUser);
+
+		return oUser.get();
 	}
 	
 	// Update an User
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update (@RequestBody Collection userDetails, @PathVariable(value = "id") Long userId) {
-		Optional<Collection> user = userService.findById(userId);
-		
-		if(!user.isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-		/*
-		// BeanUtils.copyProperties(userDetails, user.get());
-		user.get().setName(userDetails.getName());
-		user.get().setSurname(userDetails.getSurname());
-		user.get().setEmail(userDetails.getEmail());
-		user.get().setEnabled(userDetails.getEnabled());
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user.get()));
-		*/
-		return null;
+	public Collection update (@PathVariable(value = "id") Long userId, @RequestParam(required = false,value = "nombre")String nombre,@RequestParam(required = false,value = "publicador")String publicador) {
+		return userService.update(userId,nombre,publicador);
+
 	}
 	
 	// Delete an User
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete (@PathVariable(value = "id") Long userId) {
+	public void delete (@PathVariable(value = "id") Long userId) {
 		
 		if(!userService.findById(userId).isPresent()) {
-			return ResponseEntity.notFound().build();
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, String.format("Collection %d Not Found", userId));
 		}
 		
 		userService.deleteById(userId);
-		return ResponseEntity.ok().build();
+
 	}
 	
 	// Read all Users
 	@GetMapping
 	public List<Collection> readAll () {
 		
-		List<Collection> users = StreamSupport
-				.stream(userService.findAll().spliterator(), false)
-				.collect(Collectors.toList());
+
 		
-		return users;
+		return userService.findAll();
 	}
 
 }
