@@ -59,7 +59,7 @@ public class CollectionSericeImpl implements CollectionService {
 			throw new ResponseStatusException(
 					HttpStatus.NOT_FOUND, String.format("Collection %d Not Found", id));
 		}
-		System.out.println(nombre+"aqui deberia de aparecer algo");
+
 
 		Collection toUpdate = collection.get();
 		if(publicador !=null && !publicador.isBlank()){
@@ -70,10 +70,9 @@ public class CollectionSericeImpl implements CollectionService {
 		}
 
 		if(nombre != null && !nombre.isBlank()){
-			System.out.println("Es el nombre");
-			System.out.println(toUpdate.getNombre());
+
 			toUpdate.setNombre(nombre);
-			System.out.println(toUpdate.getNombre());
+
 		}
 
 		return  toUpdate;
