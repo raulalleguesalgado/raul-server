@@ -15,6 +15,8 @@ public interface CollectionService {
 	public Page<Collection> findAll(Pageable pageable);
 	
 	public Optional<Collection> findById(Long id);
+	public Long findByName(String name);
+
 
 	
 	public Collection save(Collection user);

@@ -30,7 +30,8 @@ public class Collection implements Serializable {
     @NotBlank
     private String publicador;
 
-	@OneToMany(mappedBy = "collection",fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy = "collection",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Comic> comics;
 
 

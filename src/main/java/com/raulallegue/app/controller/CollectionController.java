@@ -42,6 +42,23 @@ public class CollectionController {
 
 		return oUser.get();
 	}
+
+	@GetMapping("/per/{name}")
+	public Long readN (@PathVariable(value = "name") String name){
+		System.out.println("entra en el metodo");
+		Long id = userService.findByName(name);
+		if(id == null){
+
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, String.format("Collection  Not Found"));
+		}
+		System.out.println("llega");
+			return id;
+
+
+
+
+	}
 	
 	// Update an User
 	@PutMapping("/{id}")

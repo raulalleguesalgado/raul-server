@@ -1,5 +1,6 @@
 package com.raulallegue.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class Comic {
     private String nombre;
     @NotBlank
     private int numero;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_coleccion", foreignKey = @ForeignKey(name = "fk_coleccion_comic"))
     private Collection collection;
     @OneToMany(mappedBy = "comic",fetch = FetchType.LAZY)

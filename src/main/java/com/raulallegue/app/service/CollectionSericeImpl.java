@@ -38,6 +38,11 @@ public class CollectionSericeImpl implements CollectionService {
     }
 
     @Override
+    public Long findByName(String name) {
+        return userRepository.findIdByName(name);
+    }
+
+    @Override
     @Transactional
     public Collection save(Collection user) {
         return userRepository.save(user);
