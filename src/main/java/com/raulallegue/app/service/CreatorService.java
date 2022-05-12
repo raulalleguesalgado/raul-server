@@ -12,7 +12,7 @@ public interface CreatorService {
     public Page<Creator> findAll(Pageable pageable);
     public Optional<Creator> findById(Long id);
 
-    public Long findIdByName(String nombre);
+
 
     public Creator save(Creator creator);
 

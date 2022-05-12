@@ -1,4 +1,5 @@
 package com.raulallegue.app.entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,7 +31,8 @@ public class ComicCopy {
     @NotBlank
     private Double precio;
 
-   @JsonIgnore @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_comic", foreignKey = @ForeignKey(name = "fk_Comic_ComicCopy"))
     private Comic comic;
 

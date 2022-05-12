@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/collections")
 public class CollectionController {
 	
 	@Autowired

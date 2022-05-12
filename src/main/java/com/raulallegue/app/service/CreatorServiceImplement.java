@@ -5,11 +5,16 @@ import com.raulallegue.app.repository.CreatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 
-public class CreatorServiceImplement implements CreatorService{
+@Service
+public class CreatorServiceImplement implements CreatorService {
 
     @Autowired
     private CreatorRepository creatorRepository;
@@ -21,100 +26,47 @@ public class CreatorServiceImplement implements CreatorService{
 
     @Override
     public Page<Creator> findAll(Pageable pageable) {
-        return null;
+        return creatorRepository.findAll(pageable);
     }
 
     @Override
     public Optional<Creator> findById(Long id) {
-        return Optional.empty();
+        return creatorRepository.findById(id);
     }
 
-    @Override
-    public Long findIdByName(String nombre) {
-        return null;
-    }
 
     @Override
     public Creator save(Creator creator) {
-        return null;
+        return creatorRepository.save(creator);
     }
 
     @Override
     public void deleteById(Long id) {
+        creatorRepository.deleteById(id);
 
     }
 
     @Override
+    @Transactional
     public Creator update(Long id, String nombre, String apellidos) {
-        return null;
-    }
-}
-/*
-
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Collection> findAll() {
-        return userRepository.findAll();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<Collection> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<Collection> findById(Long id) {
-        return userRepository.findById(id);
-    }
-
-    @Override
-    public Long findByName(String name) {
-        return userRepository.findIdByName(name);
-    }
-
-    @Override
-    @Transactional
-    public Collection save(Collection user) {
-        return userRepository.save(user);
-    }
-
-    @Override
-    @Transactional
-    public void deleteById(Long id) {
-        userRepository.deleteById(id);
-    }
-
-    @Override
-    @Transactional
-	public Collection update(Long id, String nombre, String publicador) {
-        Optional<Collection> collection = userRepository.findById(id);
-        if (!collection.isPresent()) {
+        Optional<Creator> creator = creatorRepository.findById(id);
+        if (!creator.isPresent()) {
 
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, String.format("Collection %d Not Found", id));
+                    HttpStatus.NOT_FOUND, String.format("Creator %d Not Found", id));
         }
+        Creator toUpdate = creator.get();
 
-
-        Collection toUpdate = collection.get();
-        if (publicador != null && !publicador.isBlank()) {
-
-
-            toUpdate.setPublicador(publicador);
-
-        }
-
-        if (nombre != null && !nombre.isBlank()) {
+        if(nombre!=null && !nombre.isBlank()){
 
             toUpdate.setNombre(nombre);
+        }
 
+        if(apellidos!=null && !apellidos.isBlank()){
+
+            toUpdate.setApellidos(apellidos);
         }
 
         return toUpdate;
-
-
     }
- */
+}
