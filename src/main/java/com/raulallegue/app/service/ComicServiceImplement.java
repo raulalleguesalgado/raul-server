@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -51,7 +52,8 @@ public class ComicServiceImplement implements ComicService {
     }
 
     @Override
-    public Comic update(Long id, String nombre, int numero) {
+    @Transactional
+    public Comic update(Long id, String nombre, Integer numero) {
 
         Optional<Comic> comic = comicRepository.findById(id);
         if (!comic.isPresent()) {
@@ -60,11 +62,12 @@ public class ComicServiceImplement implements ComicService {
                     HttpStatus.NOT_FOUND, String.format("Comic %d Not Found", id));
         }
         Comic toUpdate = comic.get();
+
         if (nombre != null && !nombre.isBlank()) {
 
             toUpdate.setNombre(nombre);
         }
-        if (numero !=0) {
+        if (numero !=null && numero!=0) {
 
             toUpdate.setNumero(numero);
         }

@@ -53,7 +53,7 @@ public class ComicController {
 
     }
     @PutMapping("/{id}")
-    public Comic update (@PathVariable(value = "id") Long id, @RequestParam(required = true,value = "nombre")String nombre,@RequestParam(required = true,value = "numero")int numero) {
+    public Comic update (@PathVariable(value = "id") Long id, @RequestParam(required = false,value = "nombre")String nombre,@RequestParam(required = false,value = "numero")Integer numero) {
         return comicService.update(id,nombre,numero);
 
     }
