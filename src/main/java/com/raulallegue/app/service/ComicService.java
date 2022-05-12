@@ -4,9 +4,11 @@ import com.raulallegue.app.entity.Collection;
 import com.raulallegue.app.entity.Comic;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 
 public interface ComicService {
 
@@ -16,26 +18,12 @@ public interface ComicService {
 	
 	public Optional<Comic> findById(Long id);
 
-	
-	public Collection save(Comic comic);
+	public Long findIdByName(String nombre);
+
+	public Comic save(Comic comic);
 	
 	public void deleteById(Long id);
 
-	public Collection update(Long id,String nombre, int numero);
-	/*
-	 @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @NotBlank
-    private String nombre;
-    @NotBlank
-    private int numero;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_coleccion", foreignKey = @ForeignKey(name = "fk_coleccion_comic"))
-    private Collection collection;
-    @OneToMany(mappedBy = "comic",fetch = FetchType.LAZY)
-    private List<CreatorComic> creatorComicList;
-    @OneToMany(mappedBy = "comic",fetch = FetchType.LAZY)
-    private  List<ComicCopy>comicCopies;
-	 */
+	public Comic update(Long id,String nombre, int numero);
+
 }

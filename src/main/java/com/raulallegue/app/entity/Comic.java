@@ -1,5 +1,6 @@
 package com.raulallegue.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @AllArgsConstructor
@@ -22,14 +24,26 @@ public class Comic {
     private Long id;
     @NotBlank
     private String nombre;
-    @NotBlank
-    private int numero;
-    @JsonIgnore @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    private Integer numero;
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_coleccion", foreignKey = @ForeignKey(name = "fk_coleccion_comic"))
     private Collection collection;
-    @OneToMany(mappedBy = "comic",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "comic",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<CreatorComic> creatorComicList;
-    @OneToMany(mappedBy = "comic",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "comic",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private  List<ComicCopy>comicCopies;
 
+    @Override
+    public String toString() {
+        return "Comic{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", numero=" + numero +
+                ", collection=" + collection +
+                ", creatorComicList=" + creatorComicList +
+                ", comicCopies=" + comicCopies +
+                '}';
+    }
 }
