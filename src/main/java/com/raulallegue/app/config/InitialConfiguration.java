@@ -5,12 +5,12 @@ import com.raulallegue.app.repository.CollectionRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 @Component
-public class ComoQuieras implements CommandLineRunner {
+public class InitialConfiguration implements CommandLineRunner {
 
 
         private final CollectionRepository collectionRepository;
 
-        public ComoQuieras(CollectionRepository repository) {
+        public InitialConfiguration(CollectionRepository repository) {
             this.collectionRepository = repository;
         }
 

@@ -22,13 +22,13 @@ public class ComicCopy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+
     private LocalDate f_adquisicion;
     @NotBlank
     private String estado;
     @NotBlank
     private String tapa;
-    @NotBlank
+
     private Double precio;
 
     @JsonBackReference

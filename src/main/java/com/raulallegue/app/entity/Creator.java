@@ -22,7 +22,7 @@ public class Creator {
     private String nombre;
     @NotBlank
     private String apellidos;
-    @OneToMany(mappedBy = "creador",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "creador",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<CreatorComic> creatorComicList;
 
 }

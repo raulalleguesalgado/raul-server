@@ -71,6 +71,7 @@ public class ComicServiceImplement implements ComicService {
 
             toUpdate.setNumero(numero);
         }
+        comicRepository.save(toUpdate);
 
         return toUpdate;
 
