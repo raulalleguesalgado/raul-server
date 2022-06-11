@@ -16,11 +16,13 @@ public class InitialConfiguration implements CommandLineRunner {
 
         @Override
         public void run(String... args) throws Exception {
-            Collection collection = new Collection();
+           /* Collection collection = new Collection();
             collection.setNombre("Marvel 1");
 
             collection.setPublicador("Marvel Comics");
             collectionRepository.save(collection);
+
+            */
         }
 
 }

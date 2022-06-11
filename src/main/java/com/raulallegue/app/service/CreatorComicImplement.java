@@ -1,6 +1,7 @@
 package com.raulallegue.app.service;
 
 import com.raulallegue.app.entity.CreatorComic;
+import com.raulallegue.app.entity.CreatorComicDTO;
 import com.raulallegue.app.repository.CreatorComicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -61,6 +62,7 @@ public class CreatorComicImplement implements CreatorComicService {
         creatorComicRepository.save(toUpdate);
         return toUpdate;
     }
+
 
 
 }

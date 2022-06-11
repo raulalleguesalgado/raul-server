@@ -1,6 +1,7 @@
 package com.raulallegue.app.controller;
 
 import com.raulallegue.app.entity.CreatorComic;
+import com.raulallegue.app.entity.CreatorComicDTO;
 import com.raulallegue.app.service.CreatorComicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,6 +56,10 @@ public class CreatorComicController {
     public List<CreatorComic> readAll() {
 
         return creatorComicService.findAll();
+    }
+    private CreatorComicDTO convertToDTO(){
+        return null;
+
     }
 
 
