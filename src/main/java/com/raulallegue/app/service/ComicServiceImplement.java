@@ -1,7 +1,9 @@
 package com.raulallegue.app.service;
 
+import com.raulallegue.app.controller.ConvertEntityToDtoUtil;
 import com.raulallegue.app.entity.Collection;
 import com.raulallegue.app.entity.Comic;
+import com.raulallegue.app.entity.ComicDTO;
 import com.raulallegue.app.repository.ComicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,10 +21,23 @@ public class ComicServiceImplement implements ComicService {
 
     @Autowired
     private ComicRepository comicRepository;
+    @Autowired
+    private ConvertEntityToDtoUtil convertEntityToDtoUtil;
 
     @Override
     public List<Comic> findAll() {
+
+
         return comicRepository.findAll();
+    }
+
+    @Override
+    public List<ComicDTO> findAllDTO() {
+        List<ComicDTO>comicsdto;
+        List<Comic>comics=comicRepository.findAll();
+
+        comicsdto=comics.stream().map(comic -> convertEntityToDtoUtil.convertEntityToDto(comic)).collect(java.util.stream.Collectors.toList());
+        return comicsdto;
     }
 
     @Override

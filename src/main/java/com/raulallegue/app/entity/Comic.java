@@ -2,6 +2,7 @@ package com.raulallegue.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Comic {
     @ManyToOne(fetch = FetchType.LAZY)
 
     @JoinColumn(name = "id_coleccion", foreignKey = @ForeignKey(name = "fk_coleccion_comic"))
+
     private Collection collection;
     @OneToMany(mappedBy = "comic",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<CreatorComic> creatorComicList;
