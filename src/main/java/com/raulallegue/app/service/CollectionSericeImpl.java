@@ -65,6 +65,7 @@ public class CollectionSericeImpl implements CollectionService {
         }
 
 
+
         Collection toUpdate = collection.get();
         if (publicador != null && !publicador.isBlank()) {
 
@@ -78,6 +79,7 @@ public class CollectionSericeImpl implements CollectionService {
             toUpdate.setNombre(nombre);
 
         }
+        userRepository.save(toUpdate);
 
         return toUpdate;
 

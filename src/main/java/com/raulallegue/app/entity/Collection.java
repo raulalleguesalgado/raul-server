@@ -37,6 +37,9 @@ public class Collection implements Serializable {
 	@OneToMany(mappedBy = "collection",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Comic> comics;
 
+    @NotBlank
+    private byte[] imagen;
+
 
 
 }

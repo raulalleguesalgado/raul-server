@@ -1,10 +1,7 @@
 package com.raulallegue.app.service;
 
 import com.raulallegue.app.controller.ConvertEntityToDtoUtil;
-import com.raulallegue.app.entity.Collection;
-import com.raulallegue.app.entity.Comic;
-import com.raulallegue.app.entity.ComicDTO;
-import com.raulallegue.app.entity.ComicDtoNew;
+import com.raulallegue.app.entity.*;
 import com.raulallegue.app.repository.ComicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -67,7 +64,12 @@ public class ComicServiceImplement implements ComicService {
 
     @Override
     public Comic save(Comic comic) {
-
+for (CreatorComic creatorComic : comic.getCreatorComicList()) {
+    creatorComic.setComic(comic);
+for(ComicCopy comicCopy:comic.getComicCopies()){
+    comicCopy.setComic(comic);
+}
+}
         return comicRepository.save(comic);
     }
 
