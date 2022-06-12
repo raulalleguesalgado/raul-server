@@ -39,6 +39,9 @@ public class Collection implements Serializable {
 
     @NotBlank
     private byte[] imagen;
+    @NotBlank
+    private String imagenContentType;
+
 
 
 
