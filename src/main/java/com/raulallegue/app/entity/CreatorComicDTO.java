@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreatorComicDTO {
     private Long id;
-    private ComicDTO comic;
-    private CreatorDTO creador;
+    private Comic comic;
+    private Creator creador;
     private String trabajo;
 
 

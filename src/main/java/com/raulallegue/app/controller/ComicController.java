@@ -2,6 +2,7 @@ package com.raulallegue.app.controller;
 
 import com.raulallegue.app.entity.Comic;
 import com.raulallegue.app.entity.ComicDTO;
+import com.raulallegue.app.entity.ComicDtoNew;
 import com.raulallegue.app.service.ComicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -78,11 +79,11 @@ public class ComicController {
     }
 
     @GetMapping("/dto")
-    public List<ComicDTO> readAlldto() {
+    public List<ComicDtoNew> readAlldto() {
 
 
 
-        return comicService.findAllDTO();
+        return comicService.findAllDTONew();
 
 
     }

@@ -3,6 +3,7 @@ package com.raulallegue.app.service;
 import com.raulallegue.app.entity.Collection;
 import com.raulallegue.app.entity.Comic;
 import com.raulallegue.app.entity.ComicDTO;
+import com.raulallegue.app.entity.ComicDtoNew;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ public interface ComicService {
 
 	public List<Comic> findAll();
 	public List<ComicDTO> findAllDTO();
+	public List<ComicDtoNew> findAllDTONew();
 	
 	public Page<Comic> findAll(Pageable pageable);
 	

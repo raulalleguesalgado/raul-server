@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface CreatorComicService {
     public List<CreatorComic> findAll();
+
     public Page<CreatorComic> findAll(Pageable pageable);
     public Optional<CreatorComic> findById(Long id);
     public CreatorComic save(CreatorComic creatorComic);
