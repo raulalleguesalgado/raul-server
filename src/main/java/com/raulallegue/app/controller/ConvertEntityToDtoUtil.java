@@ -19,6 +19,9 @@ public class ConvertEntityToDtoUtil {
   public ComicDtoNew convertEntityToDtoNew(Comic comic){
     return modelMapper.map(comic, ComicDtoNew.class);
   }
+  public CreatorComicDtoNew convertEntityToDtoNew(CreatorComic creatorComic){
+    return modelMapper.map(creatorComic, CreatorComicDtoNew.class);
+  }
 
   }
 

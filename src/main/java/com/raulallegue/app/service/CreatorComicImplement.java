@@ -1,7 +1,7 @@
 package com.raulallegue.app.service;
 
-import com.raulallegue.app.entity.CreatorComic;
-import com.raulallegue.app.entity.CreatorComicDTO;
+import com.raulallegue.app.controller.ConvertEntityToDtoUtil;
+import com.raulallegue.app.entity.*;
 import com.raulallegue.app.repository.CreatorComicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,10 +17,21 @@ import java.util.Optional;
 public class CreatorComicImplement implements CreatorComicService {
     @Autowired
     private CreatorComicRepository creatorComicRepository;
+    @Autowired
+    private ConvertEntityToDtoUtil convertEntityToDtoUtil;
 
     @Override
     public List<CreatorComic> findAll() {
         return creatorComicRepository.findAll();
+    }
+
+    @Override
+    public List<CreatorComicDtoNew> findAllDTONew() {
+        List<CreatorComicDtoNew>creatorComicDtoNews;
+        List<CreatorComic>creatorComics=creatorComicRepository.findAll();
+        creatorComicDtoNews=creatorComics.stream().map(creatorComic -> convertEntityToDtoUtil.convertEntityToDtoNew(creatorComic)).collect(java.util.stream.Collectors.toList());
+        return creatorComicDtoNews;
+
     }
 
     @Override
