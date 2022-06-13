@@ -1,5 +1,6 @@
 package com.raulallegue.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.List;
 import java.util.Set;
 
@@ -37,9 +39,13 @@ public class Collection implements Serializable {
 	@OneToMany(mappedBy = "collection",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Comic> comics;
 
-    @NotBlank
-    private byte[] imagen;
-    @NotBlank
+
+    @Column(name = "image", length = Integer.MAX_VALUE, nullable = true)
+    @JsonIgnore
+    private byte[] image;
+
+
+    @JsonIgnore
     private String imagenContentType;
 
 

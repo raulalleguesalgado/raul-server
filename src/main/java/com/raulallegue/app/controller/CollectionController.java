@@ -1,5 +1,6 @@
 package com.raulallegue.app.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.raulallegue.app.entity.Collection;
 import com.raulallegue.app.service.CollectionService;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
@@ -25,8 +27,15 @@ public class CollectionController {
 	
 // Create a new user
 	@PostMapping
-	public Collection create ( @RequestBody Collection user) {
-
+	public Collection create (@RequestBody Collection user) {
+/*
+		try {
+			user.setImage(file.getBytes());
+			user.setImagenContentType(file.getContentType());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+*/
 		return userService.save(user);
 	}
 	
@@ -66,7 +75,16 @@ public class CollectionController {
 		return userService.update(userId,nombre,publicador);
 
 	}
-	
+	@PutMapping("/file/{id}")
+	public Collection updateI (@PathVariable(value = "id") Long userId, @RequestParam(required = false,value = "file")MultipartFile file) {
+		try {
+			return userService.updateI(userId,file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		throw new ResponseStatusException(
+				HttpStatus.CONFLICT, String.format("Error file", userId));
+	}
 	// Delete an User
 	@DeleteMapping("/{id}")
 	public void delete (@PathVariable(value = "id") Long userId) {

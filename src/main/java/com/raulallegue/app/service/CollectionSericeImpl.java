@@ -8,8 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,6 +86,31 @@ public class CollectionSericeImpl implements CollectionService {
         return toUpdate;
 
 
+    }
+
+    @Override
+    @Transactional
+    public Collection updateI(Long id, MultipartFile file) throws IOException {
+        Optional<Collection> collection = userRepository.findById(id);
+        if (!collection.isPresent()) {
+
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, String.format("Collection %d Not Found", id));
+        }
+
+
+
+        Collection toUpdate = collection.get();
+        if (file == null && file.isEmpty()) {
+
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, String.format("Image not found", id));
+        }
+        toUpdate.setImage(file.getBytes());
+        toUpdate.setImagenContentType(file.getContentType());
+
+userRepository.save(toUpdate);
+        return toUpdate;
     }
 
 }
