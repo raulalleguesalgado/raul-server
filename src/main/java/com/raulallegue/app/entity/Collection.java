@@ -41,11 +41,11 @@ public class Collection implements Serializable {
 
 
     @Column(name = "image", length = Integer.MAX_VALUE, nullable = true)
-    @JsonIgnore
+
     private byte[] image;
 
 
-    @JsonIgnore
+
     private String imagenContentType;
 
 

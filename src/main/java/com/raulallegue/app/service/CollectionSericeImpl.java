@@ -99,12 +99,16 @@ public class CollectionSericeImpl implements CollectionService {
         }
 
 
-
         Collection toUpdate = collection.get();
-        if (file == null && file.isEmpty()) {
+        if (file == null || file.isEmpty()) {
 
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, String.format("Image not found", id));
+        }
+
+        if(file.getSize() > 1000000){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, String.format("Image too big", id));
         }
         toUpdate.setImage(file.getBytes());
         toUpdate.setImagenContentType(file.getContentType());
