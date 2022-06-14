@@ -1,5 +1,6 @@
 package com.raulallegue.app.controller;
 
+import com.raulallegue.app.entity.Collection;
 import com.raulallegue.app.entity.Comic;
 import com.raulallegue.app.entity.ComicDTO;
 import com.raulallegue.app.entity.ComicDtoNew;
@@ -54,8 +55,8 @@ public class ComicController {
     }
 
     @PutMapping("/{id}")
-    public Comic update(@PathVariable(value = "id") Long id, @RequestParam(required = false, value = "nombre") String nombre, @RequestParam(required = false, value = "numero") Integer numero) {
-        return comicService.update(id, nombre, numero);
+    public Comic update(@PathVariable(value = "id") Long id, @RequestParam(required = false, value = "nombre") String nombre, @RequestParam(required = false, value = "numero") Integer numero,@RequestParam(required = false, value = "collection") Long collection) {
+        return comicService.update(id, nombre, numero,collection);
 
     }
 

@@ -2,6 +2,7 @@ package com.raulallegue.app.service;
 
 import com.raulallegue.app.controller.ConvertEntityToDtoUtil;
 import com.raulallegue.app.entity.*;
+import com.raulallegue.app.repository.CollectionRepository;
 import com.raulallegue.app.repository.ComicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,8 @@ public class ComicServiceImplement implements ComicService {
 
     @Autowired
     private ComicRepository comicRepository;
+    @Autowired
+    private CollectionRepository collectionRepository;
     @Autowired
     private ConvertEntityToDtoUtil convertEntityToDtoUtil;
 
@@ -80,7 +83,7 @@ for(ComicCopy comicCopy:comic.getComicCopies()){
 
     @Override
     @Transactional
-    public Comic update(Long id, String nombre, Integer numero) {
+    public Comic update(Long id, String nombre, Integer numero,Long collection) {
 
         Optional<Comic> comic = comicRepository.findById(id);
         if (!comic.isPresent()) {
@@ -97,6 +100,10 @@ for(ComicCopy comicCopy:comic.getComicCopies()){
         if (numero !=null && numero!=0) {
 
             toUpdate.setNumero(numero);
+        }
+        if(collection!=null){
+Collection col = collectionRepository.findById(collection).get();
+toUpdate.setCollection(col);
         }
         comicRepository.save(toUpdate);
 

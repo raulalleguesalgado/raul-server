@@ -28,6 +28,6 @@ public interface ComicService {
 	
 	public void deleteById(Long id);
 
-	public Comic update(Long id,String nombre, Integer numero);
+	public Comic update(Long id,String nombre, Integer numero,Long collection);
 
 }
