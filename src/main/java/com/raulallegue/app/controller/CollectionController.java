@@ -63,11 +63,11 @@ public class CollectionController {
 		}
 		System.out.println("llega");
 			return id;
-
-
-
-
 	}
+
+
+
+
 	
 	// Update an User
 	@PutMapping("/{id}")

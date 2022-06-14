@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Entity
-@Table(name = "creador_comic", uniqueConstraints = {@UniqueConstraint(name = "uq_creador_comic_trabajo", columnNames = {"id_comic", "id_creador","trabajo"})})
+@Table(name = "creador_comic")//, uniqueConstraints = {@UniqueConstraint(name = "uq_creador_comic_trabajo", columnNames = {"id_comic", "id_creador","trabajo"})}
 public class CreatorComic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
