@@ -36,6 +36,13 @@ public class Comic {
     private List<CreatorComic> creatorComicList;
     @OneToMany(mappedBy = "comic",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private  List<ComicCopy>comicCopies;
+    @Column(name = "image", length = Integer.MAX_VALUE, nullable = true)
+
+    private byte[] image;
+
+
+
+    private String imagenContentType;
 
     @Override
     public String toString() {

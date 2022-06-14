@@ -19,4 +19,10 @@ public class ComicDtoNew implements Serializable {
      private CollectionDtoNew collection;
      private List<CreatorComicDtoNew> creatorComicList;
      private List<ComicCopyDtoNew> comicCopies;
+        private byte[] image;
+    private String imagenContentType;
+
+
+
+
 }
