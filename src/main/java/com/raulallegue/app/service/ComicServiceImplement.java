@@ -10,8 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,17 +112,33 @@ toUpdate.setCollection(col);
         return toUpdate;
     }
 
+    @Override
+    public Comic updateI(Long id, MultipartFile file) throws IOException {
+        Optional<Comic> comic = comicRepository.findById(id);
+        if (!comic.isPresent()) {
+
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, String.format("Collection %d Not Found", id));
+        }
 
 
+        Comic toUpdate = comic.get();
+        if (file == null || file.isEmpty()) {
 
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, String.format("Image not found", id));
+        }
 
+        if(file.getSize() > 1000000){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, String.format("Image too big", id));
+        }
+        toUpdate.setImage(file.getBytes());
+        toUpdate.setImagenContentType(file.getContentType());
 
-
-
-
-
-
-
+        comicRepository.save(toUpdate);
+        return toUpdate;
+    }
 
 
 }

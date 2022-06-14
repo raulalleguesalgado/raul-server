@@ -8,8 +8,10 @@ import com.raulallegue.app.service.ComicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,6 +89,16 @@ public class ComicController {
         return comicService.findAllDTONew();
 
 
+    }
+    @PutMapping("/file/{id}")
+    public Comic updateI (@PathVariable(value = "id") Long userId, @RequestParam(required = false,value = "file") MultipartFile file) {
+        try {
+            return comicService.updateI(userId,file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        throw new ResponseStatusException(
+                HttpStatus.CONFLICT, String.format("Error file", userId));
     }
 
 
